@@ -11,9 +11,11 @@ const app = express()
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(express.json())
 app.use(express.urlencoded()) 
 
-const URI:any = process.env.MONGODB_URL;
+const URI:string = process.env.MONGODB_URL;
+const DB_NAME:string = process.env.DB_NAME;
 
 app.use('/api',routes);
 
@@ -22,7 +24,8 @@ const port = process.env.PORT || 5000;
 
 const connectDB = async ()=>{
   await mongoose.connect(URI, {
-    autoIndex: false
+    autoIndex: false,
+    dbName:DB_NAME,
   }, (err) => {
     if(err) throw err;
     console.log('Mongodb connection.');
