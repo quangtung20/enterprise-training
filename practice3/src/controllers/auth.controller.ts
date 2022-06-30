@@ -7,5 +7,5 @@ export const AuthCtrl = {
 
     login:(req:Request,res:Response)=>{
         return AuthService.login(req,res);
-    }
+    },
 }
