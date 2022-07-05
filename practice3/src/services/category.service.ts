@@ -5,7 +5,8 @@ import { Categories } from "../models/category.model";
 export const categoryService = {
     findAll: async(req: Request, res: Response)=>{
         try {
-            const categories = await Categories.find();
+            const categories = await Categories.find()
+                .populate('blogs');
             res.status(statusCode.SUCCESS).json(categories);
         } catch (error) {
             res.status(statusCode.INTERNAL).json('server error');

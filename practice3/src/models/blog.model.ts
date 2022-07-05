@@ -12,12 +12,13 @@ const blogSchema = new mongoose.Schema({
     image:{
         type:String
     },
+    
     category: { type: mongoose.Types.ObjectId, ref: 'categories' },
 
     user: { type: mongoose.Types.ObjectId, ref: 'users' },
 
 },{
-    timestamp: true,
+    timestamps: true,
 })
 
-export const Categories = mongoose.model('categories',blogSchema);
+export const Blogs = mongoose.model('blogs',blogSchema);
