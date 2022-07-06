@@ -7,9 +7,11 @@ export const blogService = {
     createBlog: async (req:Request,res:Response) => {
         try {
             const blog = await Blogs.create(req.body);
+            
             await Categories.findOneAndUpdate({_id:req.body.category},{
-                $push: {comments: blog._id}
+                $push: {blogs: blog._id}
             },{new:true})
+            
             res.status(statusCode.SUCCESS).json(blog);
         } catch (error) {
             res.status(statusCode.INTERNAL).json(error.message);
@@ -19,7 +21,7 @@ export const blogService = {
     getBlogs: async (req:Request,res:Response) => {
         try {
             const blogs = await Blogs.find()
-                .populate('category user');
+                .populate('category user','title username');
             res.status(statusCode.SUCCESS).json(blogs);
         } catch (error) {
             res.status(statusCode.INTERNAL).json(error.message);

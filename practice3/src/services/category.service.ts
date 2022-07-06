@@ -6,7 +6,7 @@ export const categoryService = {
     findAll: async(req: Request, res: Response)=>{
         try {
             const categories = await Categories.find()
-                .populate('blogs');
+                .populate('blogs','title -_id');
             res.status(statusCode.SUCCESS).json(categories);
         } catch (error) {
             res.status(statusCode.INTERNAL).json('server error');
